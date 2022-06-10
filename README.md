@@ -34,7 +34,15 @@ $ git clone https://github.com/LinnykerEros/APIRestful-NodeJS-Express-Prisma-JWT
 $ cd APIRestful-NodeJS-Express-Prisma-JWT
 
 # Instale as dependências
-$ npm
+$ npm install
+
+# Crie um arquivo .env com os arquivos
+- DATABASE_URL="a url do seu banco"
+- TOKEN_SECRET="uma chave só sua, pode ser um hash aleatório"
+- TOKEN_EXPIRATION=1d(aqui varia, você decide quanto tempo para o token expirar)
+
+# Conecte o Prisma com o seu banco, no arquivo
+- schema.prisma
 
 # Execute a aplicação em modo de desenvolvimento
 $ npm run dev
