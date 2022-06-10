@@ -28,7 +28,7 @@
 ```bash
 
 # Clone este repositório
-$ git clone <https://github.com/LinnykerEros/APIRestful-NodeJS-Express-Prisma-JWT.git>
+$ git clone <https://github.com/LinnykerEros/APIRestful-NodeJS-Express-Prisma-JWT>
 
 # Acesse a pasta do projeto no terminal/cmd
 $ cd APIRestful-NodeJS-Express-Prisma-JWT
