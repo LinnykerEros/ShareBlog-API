@@ -20,6 +20,7 @@
 - [x] Autenticação JWT
 - [x] Criptofrafia do password com bcryptjs
 - [x] Middleware de login
+- [x] Middleware de permissão admin 
 
 ---
 
