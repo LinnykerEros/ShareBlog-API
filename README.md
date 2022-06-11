@@ -44,6 +44,9 @@ $ npm install
 # Conecte o Prisma com o seu banco, no arquivo
 - schema.prisma
 
+# Faça as migrates do prisma a partir do comando
+$ npx prisma migrate dev  
+
 # Execute a aplicação em modo de desenvolvimento
 $ npm run dev
 
