@@ -16,10 +16,12 @@
 - [x] Integração do Prisma com o banco Postgresql
 - [x] Criação de tabela User com a ORM Prisma
 - [x] CRUD de Users
+- [x] Token Controller 
 - [x] Verificações
 - [x] Autenticação JWT
 - [x] Criptofrafia do password com bcryptjs
 - [x] Middleware de login
+- [x] Middleware de permissão admin 
 
 ---
 
