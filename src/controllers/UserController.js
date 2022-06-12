@@ -4,7 +4,7 @@ import bcryptjs from "bcryptjs";
 export class UsersController {
   async createUser(req, res) {
     try {
-      const { email, password, permisson } = req.body;
+      const { email, password, permission } = req.body;
       if (!email || !password) {
         return res.status(401).json({
           message: ["Por favor, informe seu email e senha!"],
@@ -23,13 +23,13 @@ export class UsersController {
         select: {
           id: true,
           email: true,
-          permisson: true,
+          permission: true,
           created_at: true,
           update_at: true,
         },
         data: {
           email,
-          permisson,
+          permission,
           password_hash: await bcryptjs.hash(password, 8),
         },
       });
@@ -71,7 +71,7 @@ export class UsersController {
         select: {
           id: true,
           email: true,
-          permisson: true,
+          permission: true,
           created_at: true,
           update_at: true,
         },

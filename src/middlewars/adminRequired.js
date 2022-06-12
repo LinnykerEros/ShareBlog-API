@@ -12,9 +12,9 @@ export default async (req, res, next) => {
 
   try {
     const dados = jwt.verify(token, process.env.TOKEN_SECRET);
-    const { permisson } = dados;
+    const { permission } = dados;
 
-    if (!permisson) {
+    if (!permission) {
       return res.status(401).json({
         errors: ["Acesso apenas para administradores"],
       });
