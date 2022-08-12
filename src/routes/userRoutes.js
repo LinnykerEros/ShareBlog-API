@@ -10,7 +10,7 @@ userRoutes.post("/", usersController.createUser);
 
 //GET
 userRoutes.get("/", loginRequired, adminRequired, usersController.findAllUsers);
-userRoutes.get("/:id", loginRequired, adminRequired, usersController.findUser);
+userRoutes.get("/:id", loginRequired, usersController.findUser);
 
 //UPDATE
 userRoutes.put("/:id", loginRequired, usersController.updateUser);

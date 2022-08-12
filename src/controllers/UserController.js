@@ -4,10 +4,10 @@ import bcryptjs from "bcryptjs";
 export class UsersController {
   async createUser(req, res) {
     try {
-      const { email, password, permission } = req.body;
-      if (!email || !password) {
+      const { name, profession, email, password, permission } = req.body;
+      if (!name || !profession || !email || !password) {
         return res.status(401).json({
-          message: ["Por favor, informe seu email e senha!"],
+          message: ["Por favor, verifique os dados e tente novamente!"],
         });
       }
       let user = await prismaClient.user.findUnique({
@@ -22,12 +22,16 @@ export class UsersController {
       user = await prismaClient.user.create({
         select: {
           id: true,
+          name: true,
+          profession: true,
           email: true,
           permission: true,
           created_at: true,
           update_at: true,
         },
         data: {
+          name,
+          profession,
           email,
           permission,
           password_hash: await bcryptjs.hash(password, 8),
@@ -50,6 +54,8 @@ export class UsersController {
         },
         select: {
           id: true,
+          name: true,
+          profession: true,
           email: true,
           created_at: true,
           update_at: true,
@@ -70,6 +76,8 @@ export class UsersController {
       const users = await prismaClient.user.findMany({
         select: {
           id: true,
+          name: true,
+          profession: true,
           email: true,
           permission: true,
           created_at: true,
@@ -85,9 +93,9 @@ export class UsersController {
   async updateUser(req, res) {
     try {
       const { id } = req.params;
-      const { email, password } = req.body;
+      const { name, profession, email, password, permission } = req.body;
 
-      if (!email || !password) {
+      if (!name || !profession || !email || !password) {
         return res.status(401).json({
           message: ["Por favor, informe seu email e senha!"],
         });
@@ -109,6 +117,8 @@ export class UsersController {
         },
         select: {
           id: true,
+          name: true,
+          profession: true,
           email: true,
           created_at: true,
           update_at: true,

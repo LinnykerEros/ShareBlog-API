@@ -12,11 +12,35 @@ datasource db {
 
 
 model User{
-  id          Int @id @default(autoincrement())
-  email       String @unique @default("") 
+  id            Int @id @default(autoincrement())
+  name          String @default("")
+  profession    String @default("")
+  email         String @unique @default("") 
   password_hash String @default("")
-  permission   Boolean? @default(false)
-  created_at  DateTime @default(now())
-  update_at   DateTime @default(now())
+  permission    Boolean? @default(false)
+  created_at    DateTime @default(now())
+  update_at     DateTime @default(now())
+  post          Post[]
+  comment       Comment[]
   @@map("user")
+}
+
+model Post {
+  id        Int       @id @default(autoincrement())
+  content   String    @default("")
+  userId    Int       @map("user_id")
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  created_at          DateTime @default(now())
+  update_at           DateTime @default(now())
+  @@map("post") 
+}
+
+model Comment {
+  id          Int     @id @default(autoincrement())
+  content     String  @default("")
+  userId    Int       @map("user_id")
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  created_at          DateTime @default(now())
+  update_at           DateTime @default(now())
+  @@map("comment") 
 }
