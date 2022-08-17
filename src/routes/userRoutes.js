@@ -9,7 +9,7 @@ const usersController = new UsersController();
 userRoutes.post("/", usersController.createUser);
 
 //GET
-userRoutes.get("/", loginRequired, adminRequired, usersController.findAllUsers);
+userRoutes.get("/", usersController.findAllUsers);
 userRoutes.get("/:id", loginRequired, usersController.findUser);
 
 //UPDATE

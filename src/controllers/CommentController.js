@@ -3,8 +3,8 @@ import { prismaClient } from "../database/prismaCliente.js";
 export class CommentController {
   async createComment(req, res) {
     try {
-      const { content, userId } = req.body;
-      if (!content || !userId) {
+      const { content, userId, postId } = req.body;
+      if (!content || !userId || !postId) {
         return res.status(401).json({
           message: ["Por favor, verifique os dados e tente novamente."],
         });
@@ -14,6 +14,7 @@ export class CommentController {
         select: {
           id: true,
           content: true,
+
           user: {
             select: {
               id: true,
@@ -22,12 +23,18 @@ export class CommentController {
               profession: true,
             },
           },
+          post: {
+            select: {
+              id: true,
+            },
+          },
           created_at: true,
           update_at: true,
         },
         data: {
           content,
           userId,
+          postId,
         },
       });
       return res
@@ -56,6 +63,11 @@ export class CommentController {
               profession: true,
             },
           },
+          post: {
+            select: {
+              id: true,
+            },
+          },
         },
       });
       if (!comment) {
@@ -82,6 +94,12 @@ export class CommentController {
               profession: true,
             },
           },
+          post: {
+            select: {
+              id: true,
+            },
+          },
+          created_at: true,
         },
       });
       return res.status(200).json(comments);

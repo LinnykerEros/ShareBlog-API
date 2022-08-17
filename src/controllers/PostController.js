@@ -57,6 +57,12 @@ export class PostController {
               profession: true,
             },
           },
+          comment: {
+            select: {
+              id: true,
+              content: true,
+            },
+          },
         },
       });
       if (!post) {
@@ -83,6 +89,13 @@ export class PostController {
               profession: true,
             },
           },
+          comment: {
+            select: {
+              id: true,
+              content: true,
+            },
+          },
+          created_at: true,
         },
       });
       return res.status(200).json(posts);
