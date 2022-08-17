@@ -32,15 +32,20 @@ model Post {
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   created_at          DateTime @default(now())
   update_at           DateTime @default(now())
+  comment       Comment[]
   @@map("post") 
 }
 
 model Comment {
   id          Int     @id @default(autoincrement())
   content     String  @default("")
-  userId    Int       @map("user_id")
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      Int       @map("user_id")
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   created_at          DateTime @default(now())
   update_at           DateTime @default(now())
+
+  postId Int @map("post_id")
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
   @@map("comment") 
 }
