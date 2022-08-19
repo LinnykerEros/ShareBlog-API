@@ -61,6 +61,7 @@ export class PostController {
             select: {
               id: true,
               content: true,
+              created_at: true,
             },
           },
         },
@@ -69,7 +70,7 @@ export class PostController {
         return res.status(404).json({ message: "Publicação não encontrada!" });
       }
 
-      return res.status(200).json(user);
+      return res.status(200).json(post);
     } catch (err) {
       return res.status(500).json({ message: err.message });
     }
@@ -93,6 +94,13 @@ export class PostController {
             select: {
               id: true,
               content: true,
+              created_at: true,
+              user: {
+                select: {
+                  name: true,
+                  id: true,
+                },
+              },
             },
           },
           created_at: true,
@@ -101,6 +109,61 @@ export class PostController {
       return res.status(200).json(posts);
     } catch (err) {
       return res.status(500).json({ message: err.message });
+    }
+  }
+
+  async updatePost(req, res) {
+    try {
+      const { id } = req.params;
+      const { userId, content } = req.body;
+
+      if (!userId || !content) {
+        return res.status(401).json({
+          message: ["Por favor, informe seu email e senha!"],
+        });
+      }
+
+      let post = prismaClient.post.findUnique({
+        where: {
+          id: Number(id),
+        },
+      });
+
+      if (!post) {
+        return res.status(404).json({ message: "Usuário não encontrado!" });
+      }
+
+      post = await prismaClient.post.update({
+        where: {
+          id: Number(id),
+        },
+        select: {
+          id: true,
+          content: true,
+          user: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+              profession: true,
+            },
+          },
+          comment: {
+            select: {
+              id: true,
+              content: true,
+              created_at: true,
+            },
+          },
+        },
+      });
+      return res
+        .status(200)
+        .json({ message: `Publicação atualizada com sucesso!`, post });
+    } catch (err) {
+      return res
+        .status(500)
+        .json({ message: `Id desta publicação está invalido!` });
     }
   }
 
