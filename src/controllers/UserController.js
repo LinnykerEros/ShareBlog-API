@@ -97,7 +97,7 @@ export class UsersController {
 
       if (!name || !profession || !email || !password) {
         return res.status(401).json({
-          message: ["Por favor, informe seu email e senha!"],
+          message: "Por favor, verifique os dados e tente novamente",
         });
       }
 
@@ -124,7 +124,10 @@ export class UsersController {
           update_at: true,
         },
         data: {
+          name,
+          profession,
           email,
+          permission,
           password_hash: await bcryptjs.hash(password, 8),
         },
       });

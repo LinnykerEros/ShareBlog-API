@@ -22,7 +22,7 @@ export class TokenController {
       return bcryptjs.compare(password, user.password_hash);
     };
     if (!(await passwordIsValid(password))) {
-      return res.json({ error: "Senha inválida!" });
+      return res.status(401).json({ error: "Senha inválida!" });
     }
     const { id, name, profession, permission } = user;
 
