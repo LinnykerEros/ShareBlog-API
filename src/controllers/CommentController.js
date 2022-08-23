@@ -80,6 +80,66 @@ export class CommentController {
     }
   }
 
+  async updateComment(req, res) {
+    try {
+      const { id } = req.params;
+      const { postId, userId, content } = req.body;
+
+      if (!userId || !postId || !content) {
+        return res.status(401).json({
+          message: ["Por favor, verifique os dados e tente novamente!"],
+        });
+      }
+
+      let comment = prismaClient.comment.findUnique({
+        where: {
+          id: Number(id),
+        },
+      });
+
+      if (!comment) {
+        return res.status(404).json({ message: "Comentário não encontrado!" });
+      }
+
+      comment = await prismaClient.comment.update({
+        where: {
+          id: Number(id),
+        },
+        select: {
+          id: true,
+          content: true,
+          user: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+              profession: true,
+            },
+          },
+          post: {
+            select: {
+              id: true,
+              content: true,
+              created_at: true,
+            },
+          },
+        },
+        data: {
+          content,
+          userId,
+          postId,
+        },
+      });
+      return res
+        .status(200)
+        .json({ message: `Comentário atualizada com sucesso!`, comment });
+    } catch (err) {
+      return res
+        .status(500)
+        .json({ message: `Id deste comentário está invalido!` });
+    }
+  }
+
   async findAllComments(req, res) {
     try {
       const comments = await prismaClient.comment.findMany({
