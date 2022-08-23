@@ -12,6 +12,10 @@ postRoutes.post("/", postController.createPost);
 postRoutes.get("/", loginRequired, postController.findAllPosts);
 postRoutes.get("/:id", loginRequired, postController.findPost);
 
+//PUT
+
+postRoutes.put("/:id", loginRequired, postController.updatePost);
+
 //DELETE
 postRoutes.delete("/:id", loginRequired, postController.deletePost);
 

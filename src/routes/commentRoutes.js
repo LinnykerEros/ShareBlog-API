@@ -12,6 +12,9 @@ commentRoutes.post("/", commentController.createComment);
 commentRoutes.get("/", loginRequired, commentController.findAllComments);
 commentRoutes.get("/:id", loginRequired, commentController.findComment);
 
+//PUT
+commentRoutes.put("/:id", loginRequired, commentController.updateComment);
+
 //DELETE
 commentRoutes.delete("/:id", loginRequired, commentController.deleteComment);
 
