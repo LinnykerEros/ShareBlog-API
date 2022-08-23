@@ -59,6 +59,34 @@ export class UsersController {
           email: true,
           created_at: true,
           update_at: true,
+          post: {
+            select: {
+              id: true,
+              comment: {
+                select: {
+                  id: true,
+                  content: true,
+                  created_at: true,
+                  user: {
+                    select: {
+                      name: true,
+                      id: true,
+                    },
+                  },
+                },
+              },
+              content: true,
+              created_at: true,
+              user: {
+                select: {
+                  id: true,
+                  profession: true,
+                  name: true,
+                  created_at: true,
+                },
+              },
+            },
+          },
         },
       });
       if (!user) {
