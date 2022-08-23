@@ -119,7 +119,7 @@ export class PostController {
 
       if (!userId || !content) {
         return res.status(401).json({
-          message: ["Por favor, informe seu email e senha!"],
+          message: ["Por favor, verifique os dados e tente novamente!"],
         });
       }
 
@@ -130,7 +130,7 @@ export class PostController {
       });
 
       if (!post) {
-        return res.status(404).json({ message: "Usuário não encontrado!" });
+        return res.status(404).json({ message: "Post não encontrado!" });
       }
 
       post = await prismaClient.post.update({
@@ -155,6 +155,10 @@ export class PostController {
               created_at: true,
             },
           },
+        },
+        data: {
+          content,
+          userId,
         },
       });
       return res
