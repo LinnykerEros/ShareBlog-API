@@ -3,7 +3,7 @@ import { router } from "./routes/router.js";
 import cors from "cors";
 const app = express();
 const corsOptions = {
-  origin: "https://share-blog-front.vercel.app/",
+  origin: "https://share-blog-front-nel1rqoxo-share-blog.vercel.app/",
   credentials: true,
   optionSucessStatus: 200,
 };
