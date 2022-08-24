@@ -123,7 +123,7 @@ export class UsersController {
       const { id } = req.params;
       const { name, profession, email, password, permission } = req.body;
 
-      if (!name || !profession || !email || !password) {
+      if (!name || !profession || !email) {
         return res.status(401).json({
           message: "Por favor, verifique os dados e tente novamente",
         });
@@ -156,16 +156,18 @@ export class UsersController {
           profession,
           email,
           permission,
-          password_hash: await bcryptjs.hash(password, 8),
+          password_hash: password
+            ? await bcryptjs.hash(password, 8)
+            : (
+                await user
+              ).password_hash,
         },
       });
       return res
         .status(200)
         .json({ message: `Usuário atualizado com sucesso!`, user });
     } catch (err) {
-      return res
-        .status(500)
-        .json({ message: `Email deste usuário está invalido!` });
+      return res.status(500).json({ message: err.message });
     }
   }
 
