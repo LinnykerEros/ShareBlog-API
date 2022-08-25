@@ -57,6 +57,8 @@ export class UsersController {
           name: true,
           profession: true,
           email: true,
+
+          permission: true,
           created_at: true,
           update_at: true,
           post: {
@@ -148,6 +150,7 @@ export class UsersController {
           name: true,
           profession: true,
           email: true,
+          permission: true,
           created_at: true,
           update_at: true,
         },
