@@ -1,4 +1,4 @@
-<h1> APIRestful-NodeJS-Express-Prisma-JWT </h1>
+<h1> ShareBlog </h1>
 
 <h2>Sobre</h2>
 <p> <strong>Fiz esse projeto com o intuito de aprender e também consolidar ainda mais meus conhecimentos sobre o NodeJS, JWT e a ORM(PRISMA). </strong></p>
